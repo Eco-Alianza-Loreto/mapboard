@@ -270,6 +270,10 @@ export default {
         for (let item of items) {
           let props = Object.assign({}, style);
 
+          if(tableConfig.options.mapHover === false){
+              props.mapHover = false;
+             }
+
           props.geojson = item.geometry;
           props.key = item.id;
           props.featureId = item._featureId || null;
@@ -277,6 +281,7 @@ export default {
           features.push(props);
         }
       }
+      console.log(features);
       return features;
     },
 
@@ -337,17 +342,19 @@ export default {
       group.appendChild(el);
     },
     handleMarkerMouseover(e) {
-      // console.log('handleMarkerMouseover is starting');
+      console.log('handleMarkerMouseover is starting');
+      console.log("handleMarkerMouseover: ", e);
+
       if (!this.isMobileOrTablet) {
-        // console.log('handleMarkerMouseover actions are running');
+        console.log('handleMarkerMouseover actions are running');
         const { target } = e;
         const { featureId, tableId } = target.options.data;
-        // console.log('target:', target, 'featureId:', featureId, 'tableId:', tableId);
+        console.log('target:', target, 'featureId:', featureId, 'tableId:', tableId);
         this.$store.commit('setActiveFeature', { featureId, tableId });
       }
     },
     handleMarkerClick(e) {
-      // console.log('handleMarkerClick is starting');
+      console.log('handleMarkerClick is starting');
       if (this.isMobileOrTablet) {
         // console.log('handleMarkerClick actions are running');
         const { target } = e;
