@@ -281,7 +281,6 @@ export default {
           features.push(props);
         }
       }
-      console.log(features);
       return features;
     },
 
@@ -342,22 +341,16 @@ export default {
       group.appendChild(el);
     },
     handleMarkerMouseover(e) {
-      console.log('handleMarkerMouseover is starting');
-      console.log("handleMarkerMouseover: ", e);
 
       if (!this.isMobileOrTablet) {
-        console.log('handleMarkerMouseover actions are running');
         const { target } = e;
         const { featureId, tableId, highlightOnMapMouseover } = target.options.data;
-        console.log('target:', target, 'featureId:', featureId, 'tableId:', tableId, 'highlightOnMapMouseover:', highlightOnMapMouseover);
+        // console.log('target:', target, 'featureId:', featureId, 'tableId:', tableId, 'highlightOnMapMouseover:', highlightOnMapMouseover);
         if (typeof highlightOnMapMouseover !== 'undefined') {
-          console.log('highlightOnMapMouseover exists');
           if (highlightOnMapMouseover != false) {
-            console.log('highlightOnMapMouseover != false')
             this.$store.commit('setActiveFeature', { featureId, tableId });
           }
         } else {
-          console.log('else is running, highlightOnMapMouseover:', highlightOnMapMouseover);
           this.$store.commit('setActiveFeature', { featureId, tableId });
         }
       }

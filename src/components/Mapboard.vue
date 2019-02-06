@@ -97,7 +97,7 @@
       return data;
     },
     created() {
-      console.log('mapboard created, this.$config:', this.$config);
+      // console.log('mapboard created, this.$config:', this.$config);
       if (this.$config.panels) {
         if (!this.$config.panels.includes('map')) {
           this.$store.commit('setTopicsOnly', true);
