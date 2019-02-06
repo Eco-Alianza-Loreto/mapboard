@@ -270,8 +270,8 @@ export default {
         for (let item of items) {
           let props = Object.assign({}, style);
 
-          if(tableConfig.options.mapHover === false){
-              props.mapHover = false;
+          if(tableConfig.options.highlightOnMapMouseover === false){
+              props.highlightOnMapMouseover = false;
              }
 
           props.geojson = item.geometry;
@@ -348,9 +348,18 @@ export default {
       if (!this.isMobileOrTablet) {
         console.log('handleMarkerMouseover actions are running');
         const { target } = e;
-        const { featureId, tableId } = target.options.data;
-        console.log('target:', target, 'featureId:', featureId, 'tableId:', tableId);
-        this.$store.commit('setActiveFeature', { featureId, tableId });
+        const { featureId, tableId, highlightOnMapMouseover } = target.options.data;
+        console.log('target:', target, 'featureId:', featureId, 'tableId:', tableId, 'highlightOnMapMouseover:', highlightOnMapMouseover);
+        if (typeof highlightOnMapMouseover !== 'undefined') {
+          console.log('highlightOnMapMouseover exists');
+          if (highlightOnMapMouseover != false) {
+            console.log('highlightOnMapMouseover != false')
+            this.$store.commit('setActiveFeature', { featureId, tableId });
+          }
+        } else {
+          console.log('else is running, highlightOnMapMouseover:', highlightOnMapMouseover);
+          this.$store.commit('setActiveFeature', { featureId, tableId });
+        }
       }
     },
     handleMarkerClick(e) {

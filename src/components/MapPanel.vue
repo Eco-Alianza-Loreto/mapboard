@@ -164,7 +164,7 @@
        <!-- reactive geojson features -->
        <geojson v-for="geojsonFeature in reactiveGeojsonFeatures"
                 v-if="shouldShowGeojson(geojsonFeature.key)"
-                @l-mouseover="checkMapHover(geojsonFeature)"
+                @l-mouseover="handleMarkerMouseover"
                 @l-click="handleMarkerClick"
                 @l-mouseout="handleMarkerMouseout"
                 :geojson="geojsonFeature.geojson"
@@ -176,7 +176,8 @@
                 :key="geojsonFeature.key"
                 :data="{
                   featureId: geojsonFeature.featureId,
-                  tableId: geojsonFeature.tableId
+                  tableId: geojsonFeature.tableId,
+                  highlightOnMapMouseover: geojsonFeature.highlightOnMapMouseover
                 }"
         />
 
@@ -197,7 +198,7 @@
                      @l-mouseover="handleMarkerMouseover"
                      @l-click="handleMarkerClick"
                      @l-mouseout="handleMarkerMouseout"
-                     :mapHover="circleMarker.mapHover"
+                     :highlightOnMapMouseover="circleMarker.highlightOnMapMouseover"
                      :latlng="circleMarker.latlng"
                      :radius="circleMarker.radius"
                      :fillColor="circleMarker.fillColor"
@@ -209,7 +210,7 @@
                      :data="{
                        featureId: circleMarker.featureId,
                        tableId: circleMarker.tableId,
-                       mapHover: circleMarker.mapHover
+                       highlightOnMapMouseover: circleMarker.highlightOnMapMouseover
                      }"
       />
 
@@ -822,13 +823,6 @@
           return true;
         } else {
           return key === this.activeDorParcel;
-        }
-      },
-      checkMapHover(geojsonFeature) {
-        console.log("Check Map Hover: ", geojsonFeature)
-        if(geojsonFeature.mapHover === false){
-          console.log("Value is false");
-          return this.handleMarkerMouseover;
         }
       },
       shouldShowImageOverlay(key) {
