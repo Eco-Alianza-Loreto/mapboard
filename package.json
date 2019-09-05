@@ -11,7 +11,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@philly/vue-comps": "^1.0.36",
+    "@philly/vue-comps": "https://github.com/CityOfPhiladelphia/phila-vue-comps#5a6694e0fe9006dc672086c0686a07700407f84c",
     "@philly/vue-datafetch": "^0.0.22",
     "@philly/vue-mapping": "^1.0.35",
     "vue": "^2.6.9",
