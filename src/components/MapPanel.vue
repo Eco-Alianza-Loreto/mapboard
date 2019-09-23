@@ -86,10 +86,11 @@
                               :key="key"
                               :url="'//gis-svc.databridge.phila.gov/arcgis/rest/services/Atlas/RegMaps/MapServer'"
                               :layers="[0]"
-                              :layerDefs="'0:NAME=\'g' + item.properties.RECMAP.toLowerCase() + '.tif\''"
+                              :layerDefs="getRegmapLayerDefs(item)"
                               :transparent="true"
                               :opacity="0.5"
       />
+      <!-- :layerDefs="'0:NAME=\'g' + item.properties.RECMAP.toLowerCase() + '.tif\''" -->
       <!-- :url="'//gis.phila.gov/arcgis/rest/services/DOR_ParcelExplorer/rtt_basemap/MapServer/'" -->
       <!-- :url="this.imageOverlayInfo.url"
       :opacity="this.imageOverlayInfo.opacity" -->
@@ -820,6 +821,13 @@
       },
     },
     methods: {
+      getRegmapLayerDefs(item) {
+        if (item.properties.RECMAP) {
+          return '0:NAME=\'g' + item.properties.RECMAP.toLowerCase() + '.tif\''
+        } else {
+          return '';
+        }
+      },
       checkBoundsChanges() {
         let czts = this.activeTopicConfig.zoomToShape;
         if (!czts) {
